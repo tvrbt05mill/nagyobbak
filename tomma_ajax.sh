@@ -11,8 +11,8 @@ echo $(basename "$0")".         Helo there<br />"
 echo $(basename "$0")".         Just testade<br /> "
 echo $(basename "$0")".         <hr>"
 date 
-date    >> /var/www/omx.utc/aaa.cgibol
 echo "<br>"$(basename "$0")"                 <hr>"
+
 
 
 # PARAMETER FELDOLGOZAS
@@ -59,12 +59,17 @@ echo "<br>"$(basename "$0")"                 <hr>"
  
         esac
   done
- 
+
+
+T="$(date +%s)"
+echo ""   >> $KONYVT"zott/tomma_ajax.log"
+date      >> $KONYVT"zott/tomma_ajax.log"
+
 echo $(basename "$0")'               Parsed Values:<br>'
 echo $(basename "$0")'               ARGX: '$ARGX   '...ARGY: ' $ARGY   '...ARGZ: ' $ARGZ   '...KONYVT: ' $KONYVT  '<br>' 
-echo $(basename "$0")"               MMMMMMMMMMMMMMMMMMMMMMMMMM"  >>$KONYVT"checkout/tomma_ajax.log"
-date  >>$KONYVT"checkout/log"
-echo $(basename "$0")"               ARGX  "$ARGX ";;  ARGY  "$ARGY  ";;  ARGZ  "$ARGZ     >>$KONYVT"checkout/tomma_ajax.log"
+#echo $(basename "$0")"               MMMMMMMMMMMMMMMMMMMMMMMMMM"  >>$KONYVT"checkout/tomma_ajax.log"
+
+echo $(basename "$0")"               ARGX  "$ARGX ";;  ARGY  "$ARGY  ";;  ARGZ  "$ARGZ     > $KONYVT"zott/feldolgozas.alatt"
 
 # PARAMETER FELDOLGOZAS VEEEEEGE
 
@@ -88,7 +93,7 @@ echo $(basename "$0")"         WWWWWWWWWWWWWWWWWW<br>"
 
 ########cat $f   >>  "/var/www/omx.utc.ark/"$(basename "$f") 
 cat $f   >>  $KONYVT""$(basename "$f") 
-echo "$(basename "$0")          concat :::"  $f  " ---  $KONYVT"$(basename "$f")     >> /var/www/omx.utc/aaa.cgibol
+echo "$(basename "$0")          concat :::"  $f  " ---  $KONYVT"$(basename "$f")     >> $KONYVT"zott/feldolgozas.alatt"
 echo "$(basename "$0")          concat :::"   $f " ---  $KONYVT"$(basename "$f")   "<br>"
 
 #>>   /var/www/omx.utc/aaa.cgibol
@@ -104,6 +109,17 @@ echo "$(basename "$0")         <hr>"
 #zip /home/www/cgi-bin/aaa.zip /home/www/cgi-bin/*
 #zip -j /var/www/omx.utc/zip.zipCGIBOL  /var/www/omx.utc/*_UTC*
 #rm *_UTC*
+
+echo "<hr><br>Datum $(date )</b>"   >>  $KONYVT"zott/tomma_ajax.log"
+
+T="$(($(date +%s)-T))"
+echo "<hr><br>Time in seconds: ${T}</b>"   >>  $KONYVT"zott/tomma_ajax.log"
+echo "<hr><br>Time in seconds: ${T}</b>"   
+
+printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  >>  $KONYVT"zott/tomma_ajax.log"
+printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  
+
+
 
 echo "$(basename "$0")         vége  xxxxxxxxxxxxxxxxxxxxxxxxx"
 echo '$(basename "$0")         </body></html>'
