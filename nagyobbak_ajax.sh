@@ -30,7 +30,7 @@ arkiv=$(echo "$year")"_"$(echo "$honap")".zip"
 echo "arkiv:["$arkiv"]"
 #zip  /var/www/netfonds/ark/"$year"_"$honap".zip  *"$year""$honap".csv
 #zip  $arkiv  *"$year""$honap".csv
-zip  $arkiv  *.csv
+zip  -q $arkiv  *.csv
 mv -v "$arkiv" ./ark/"$arkiv"
 mv -v BBB.zip ./ark/AAA.zip
 echo "mv eredmenye volt"
@@ -46,6 +46,7 @@ echo "..........................................................................
 #######      ./000nagyobbak.fut    ###########
 ##############################################
 ##############################################
+cd /var/www/netfonds
 
 
 
@@ -66,7 +67,7 @@ mv -f *-*.* ./kisebbek
 echo "000nagyobbak.fut  KESZ"
 
 
-
+exit
 
 
 
