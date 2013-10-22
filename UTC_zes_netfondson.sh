@@ -155,6 +155,8 @@ minta=$(TZ=GMT+0 date  -d '04/25/2008 00:00:00' +%s) ;
 echo "minta:" $minta;
 TZ=GMT+0 date --date='04/25/2008 00:00:00'   +"%s";
 
+T="$(date +%s)"
+
 
 cd /var/www/netfonds.utc/UTC_zes_netfondson
 indul="indul:"$(date)  
@@ -169,6 +171,9 @@ ZOTT="./zott/";
 for f in $ZANDO_01
 do
   echo "Processing $f file...  "$ZANDO_01"-ban"
+  echo "Processing $f file...   " $(date)  > feldogozas.alatt 
+  echo  $(ls -l "$f")  >> feldogozas.alatt 
+  
   # feldolgozas ${f%%.*}  # ez a filenev lekérése
   kortname=`echo $(basename "$f") | cut -d "-"  -f1  `
 echo "kortname:" $kortname
@@ -282,6 +287,21 @@ vegeJS="vege:"$(date)
 echo "indult: " $indulJS
 echo  "befejezve: " $vegeJS
 echo "lefutott a feldolgozasJS() ....."
+
+
+
+
+
+
+echo "<hr><br>DÃÃ¡tum $(date +'%YY*-%m-%d %H:%M')</b>"   >>  UTC_zes_netfondson.log
+
+T="$(($(date +%s)-T))"
+echo "<hr><br>Time in seconds: ${T}</b>"   >>  UTC_zes_netfondson.log
+echo "<hr><br>Time in seconds: ${T}</b>"   
+
+printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  >>  UTC_zes_netfondson.log
+printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  
+
 
 
 exit
