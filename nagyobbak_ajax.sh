@@ -5,6 +5,18 @@ echo ""
 
 date
 
+
+#  várunk a TOKEN-re, amit a netfonds.letoltes.elhelez
+#  akor kezdödhet a feldolgozas
+#  mert ha gyorsaabban klezd el futni, kimaradnak file-ok és letörlőd-
+#  hetnének
+
+#  while not exit a TOKEN addig itt futkosunk
+#  ha megjüön elengedjük
+#  esetleg lehet logba kiirni, hogy TOKENre várunk meg
+
+ 
+
 echo ""   > /home/www/cgi-bin/nagyobbak.log  
 date   >> /home/www/cgi-bin/nagyobbak.log  
 echo ""
@@ -30,7 +42,9 @@ arkiv=$(echo "$year")"_"$(echo "$honap")".zip"
 echo "arkiv:["$arkiv"]"
 #zip  /var/www/netfonds/ark/"$year"_"$honap".zip  *"$year""$honap".csv
 #zip  $arkiv  *"$year""$honap".csv
-zip  -q $arkiv  *.csv
+zip   -q $arkiv  *.csv
+
+
 mv -v "$arkiv" ./ark/"$arkiv"
 mv -v BBB.zip ./ark/AAA.zip
 echo "mv eredmenye volt"
@@ -56,18 +70,18 @@ echo "utana ugyis DATUM alapjan zippeljuk be a z arkiv.fut ban"
 for f  in  AAK-*.*	ABB-*.*	ACTI-*.*	AERO_B-*.*	AF_B-*.*	AKSOO-*.*	ALFA-*.*	ALIV_SDB-*.*	AOI-*.*	AOIL_SDB-*.*	ARCM-*.*	ASSA_B-*.* 	ATCO_A-*.*	ATCO_B-*.*	AXFO-*.*	AXIS-*.*	AZN-*.*	BETS_B-*.*	BIGG_B-*.*	BILI_A-*.*	BILL-*.*	BINV-*.*	BOL-*.*	CAS-*.*	CAST-*.*	CDON-*.*	CLS_B-*.*	CTEC-*.*	DIAM_B-*.*	DNBO-*.*	EKTA_B-*.*	ELUX_B-*.*	ENQ-*.*	ENRO-*.*	EPCT-*.*	ERIC_B-*.*	FABG-*.*	FING_B-*.*	FOEO-*.*	GETI_B-*.*	GJFO-*.*	GOLD-*.*	HEXA_B-*.*	HLDX-*.*	HM_B-*.*	HOGA_B-*.*	HOLM_B-*.*	HPOL_B-*.*	HUFV_A-*.*	HUSQ_B-*.*	IJ-*.*	INDU_A-*.*	INDU_C-*.*	INVE_A-*.*	INVE_B-*.*	JM-*.*	KAHL-*.*	KARO-*.*	KDEV-*.*	KINV_B-*.*	KLED-*.*	LIAB-*.*	LOOM_B-*.*	LUMI_SDB-*.*	LUND_B-*.*	LUPE-*.*	MEDA_A-*.*	MHGO-*.*	MICR-*.*	MIC_SDB-*.*	MTG_B-*.*	MVIR_B-*.*	NCC_B-*.*	NDA_SEK-*.*	NEWA_B-*.*	NHYO-*.*	NIBE_B-*.*	NOBI-*.*	NOKI_SEK-*.*	NOMI-*.*	OASM-*.*	OPCO-*.*	ORI_SDB-*.*	ORKO-*.*	PAR-*.*	PEAB_B-*.*	PGSO-*.*	PREC-*.*	RATO_B-*.*	RCLO-*.*	RURI_B-*.*	SAAB_B-*.*	SAND-*.*	SAS-*.*	SCA_B-*.*	SCH_O-*.*	SCV_B-*.*	SDRLO-*.*	SEB_A-*.*	SECU_B-*.*	SEMC-*.*	SENS-*.*	SHB_A-*.*	SKA_B-*.*	SKF_B-*.*	SMF-*.*	SNM-*.*	SOBI-*.*	SSAB_A-*.*	SSAB_B-*.*	STBO-*.*	STE_R-*.*	STLO-*.*	SUBCO-*.*	SWED_A-*.*	SWMA-*.*	TAUR_B-*.*	 TEL-*.*	TELO-*.*	TGSO-*.*	TLSN-*.*	TREL_B-*.*	UNIB_SDB-*.*	VOLV_A-*.*	VOLV_B-*.*	XACT_BEAR-*.*	XACT_BULL-*.*	 YARO-*.*
 do
 
-mv -f $f  ./nagyobbak
+mv -v -f $f  ./nagyobbak
 
 done
 
 
-mv -f *-*.* ./kisebbek
+mv -v -f *-*.* ./kisebbek
 
 
 echo "000nagyobbak.fut  KESZ"
 
 
-exit
+
 
 
 
@@ -99,7 +113,7 @@ echo "..........................................................................
 arkiv=$(echo "$year")"_"$(echo "$honap")".zip"
 echo "arkiv22222:["$arkiv"]"
 
-zip  $arkiv  ../nagyobbak/*$year$honap.csv
+zip -q $arkiv  ../nagyobbak/*$year$honap.csv
 
 
 
