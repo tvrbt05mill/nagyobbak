@@ -1,0 +1,85 @@
+<html><head>
+	
+	
+	<title>Ajax Example</title>
+<script language="Javascript">
+function xmlhttpPost(strURL) {
+    var xmlHttpReq = false;
+    var self = this;
+    if (window.XMLHttpRequest) {
+        self.xmlHttpReq = new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject) {
+        self.xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    self.xmlHttpReq.open('POST', strURL, true);
+    self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    self.xmlHttpReq.onreadystatechange = function() {
+		//alert("responseText nincs meg???"+self.xmlHttpReq.readyState);
+		updatepage("0000000000updatepage"+self.xmlHttpReq.responseText);
+        if (self.xmlHttpReq.readyState == 4) {
+			
+            alert(self.xmlHttpReq.responseText);
+            updatepage(self.xmlHttpReq.responseText);
+            
+        }
+    }
+    self.xmlHttpReq.send(getquerystring());
+//alert("responseText nincs meg???"+self.xmlHttpReq.readyState);    
+}
+
+function getquerystring() {
+    var form     = document.forms['f1'];
+    var word = form.word.value;
+    qstr = 'w=' + escape(word);
+    return qstr;
+}
+
+function updatepage(str){
+    document.getElementById("result").innerHTML = str;
+}
+</script>
+</head>
+
+
+
+
+
+
+<body>
+<form name="f1">
+  <p>word: <input name="word" type="text">  
+  <input value="Go" type="button" onclick='JavaScript:xmlhttpPost("http://127.0.0.1/cgi-bin/DEBUG_ajax.sh")'></p>
+  <div id="result"></div>
+  <hr>
+  
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CGI hívása													<br>
+..........::  cgi-bin/nagyobbak_HIVO.sh					<br>
+..........::  <a href="http://127.0.0.1/cgi-bin/nagyobbak_HIVO.sh" >nagyobbak_HIVO.sh</a> <br>
+..........||----->											<br>
+.................|											<br>
+.................|											<br>
+................+------->nagyobbak.sh &   fut a háttérben	<br>
+																<br>
+CGI visszatér													<br>
+						
+
+
+<br></br>
+tail vege
+</body></html>
