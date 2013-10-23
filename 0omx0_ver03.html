@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highstock Example</title>
+
+
+<SCRIPT  SRC="ADS.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="ALV.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="BAS.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="BAYN.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="BEI.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="CON.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="CBK.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="DAI.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="DAX.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="DB1.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="DBK.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="EOAN.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="FME.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="FRE.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="HEI.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="LHA.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="LIN.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="LXS.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="MRK.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="MUV2.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="SAP.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="SDF.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="SIE.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="TKA.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="VOW3.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="OMXSPI.js" TYPE="text/javascript"></SCRIPT> 
+<SCRIPT  SRC="AAK.js" TYPE="text/javascript"></SCRIPT> 
+
+
+<script src="data.js"    type="text/javascript"></script>
+
+<script     /*   %számítás rákkatintva a GRAFIKONRA*/
+
+                          type="text/javascript">
+//var series_ = [mydata, mydataCBK, mydataADS];
+//var symb_ = ["CBK", "ADS"];
+
+var tombminta = { 
+        "ADS":  [  [1381160289,79.996,"2013-10-07 15:38:09", "ADS" ],
+[1381160310,79.996,"2013-10-07 15:38:30", "ADS" ],
+[1381160331,79.996,"2013-10-07 15:38:51", "ADS" ],] ,
+
+        "CBK":  [  [1381160289,8.902,"2013-10-07 15:38:09", "CBK" ],
+[1381160310,8.902,"2013-10-07 15:38:30", "CBK" ],
+[1381160331,8.902,"2013-10-07 15:38:51", "CBK" ], ] 
+               
+
+
+</script>
+ /*ver  3.0   */     /*   %számítás rákkatintva a GRAFIKONRA*/
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+$(function() {
+	
+	
+	    /* ELMENTJÜK EBBE A Y ÉRTÉKET  */
+    var alapertek=1;  
+    
+    var chart = new Highcharts.StockChart(
+		{
+			chart: {
+					renderTo: 'container'
+			},
+			
+			  tooltip: {
+                /*  TOOLTIPBEN megjelenitjük  */
+                formatter: function() {
+                  if (alapertek == 1) {} else  {var szaz=(this.y-alapertek)/alapertek*100;}
+                return Highcharts.dateFormat('%Y - %B - %e, , %H:%M',this.x)+'<br><b>'+ Highcharts.numberFormat(this.y, 2) +'</b><br/>'+
+                    '%: '+ Highcharts.numberFormat(szaz, 2);
+            }  
+            },
+    
+			
+			
+			series: [{
+            name: 'New Series',
+            //mydata
+            data: mydata,
+             events: {
+                click: function(event) {
+                    var szaz=0;
+                    /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+                    if (alapertek == 1) {
+                           alapertek=event.point.y;      
+                           alert(event.point.y/alapertek);
+                        }
+                    else
+                    /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+                    {szaz=(event.point.y-alapertek)/alapertek*100};   
+                        this.chart.series[1].addPoint({
+                        x: event.point.x,
+                        title: '#'+Highcharts.numberFormat(szaz, 2)+"("+Highcharts.numberFormat(event.point.y,2)+")"
+                    }); 
+                }
+
+            }
+			},
+			{
+			/* ALAPERTÉK KIJELZESE a tenghelyen vagy line-on   */ 	
+            type: 'flags',
+            data: [],
+            onSeries: 'dataseries',
+            shape: 'squarepin',
+            }
+            ]
+		},	function(chart)
+				{
+				
+				$('#btn').click(function(){
+               	 while(chart.series.length > 0)
+						chart.series[0].remove(true);
+				 chart.setTitle({text:'DAX'});
+               	 chart.addSeries({
+							data: tombx["CBK"] //mydata
+							})
+					//chart.series[0].setData(mydata,true); 
+				alert(chart.series[0]["name"]);	
+				});
+				
+				
+				
+				$('#selectem').change(function()
+					{
+						//alert('tomb:'+tomb[$('#selectem').val()]);
+					  alapertek = 1;
+					  while(chart.series.length > 0)
+					  chart.series[0].remove(true);
+					  chart.setTitle({text:$('#selectem').val()});
+					  chart.addSeries(
+							{							  
+							  data: tombyYY[$('#selectem').val()],  //data: tomby[$('#selectem').val()]
+							  
+							     events: {
+										click: function(event) {
+											var szaz=0;
+											/* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+											if (alapertek == 1) {
+											alapertek=event.point.y;      
+											alert(event.point.y/alapertek);
+											}
+											else
+											{szaz=(event.point.y-alapertek)/alapertek*100};   
+											this.chart.series[1].addPoint({
+													x: event.point.x,
+													title: '#'+Highcharts.numberFormat(szaz, 2)
+													}); 
+											}
+
+								}
+							  
+							});
+							
+							
+						chart.addSeries(
+							{		
+								type: 'flags',
+								data: [],
+								onSeries: 'dataseries',
+								shape: 'squarepin',
+							});	
+							
+							
+							
+					chart.series[0].name=$('#selectem').val();
+										//chart.redraw();		
+										//alert('tomb:'+tombyYY["BAYN"]);
+									//alert('#selectem).val():'+$('#selectem').val()+'   ###\n  tomb val :'+tombyYY[$('#selectem').val()]);
+
+					});
+
+
+
+
+
+var tombProbara = {   "ADSwwwww":  [  [1381160289000,71.996,"2013-10-07 15:38:09", "ADS" ],
+[1381160310000,69.996,"2013-10-07 15:38:30", "ADS" ],
+[1381160331000,59.996,"2013-10-07 15:38:51", "ADS" ],] ,
+               
+        
+        "ALV":  [  [1381160289000,8.902,"2013-10-07 15:38:09", "CBK" ],
+[1381160310000,6.902,"2013-10-07 15:38:30", "CBK" ],
+[1381160331000,7.902,"2013-10-07 15:38:51", "CBK" ], ] ,
+
+        "ADS2":  [  [1381160289000,71.996,"2013-10-07 15:38:09", "ADS" ],
+[1381160310000,69.996,"2013-10-07 15:38:30", "ADS" ],
+[1381160331000,59.996,"2013-10-07 15:38:51", "ADS" ],] 
+               
+       
+        
+    }
+
+
+	
+var tombyYYmente = { 
+        "BAYN":  mydataBAYN ,
+        
+                          
+               }
+
+        
+        
+ var tombyYY = {
+"ADS": mydataADS,
+"ALV": mydataALV,
+"BAS": mydataBAS,
+"BAYN": mydataBAYN,
+"BEI": mydataBEI,
+"CON": mydataCON,
+"CBK": mydataCBK,
+"DAI": mydataDAI,
+"DAX": mydataDAX,
+"DB1": mydataDB1,
+"DBK": mydataDBK,
+"EOAN": mydataEOAN,
+"FME": mydataFME,
+"FRE": mydataFRE,
+"HEI": mydataHEI,
+"LHA": mydataLHA,
+"LIN": mydataLIN,
+"LXS": mydataLXS,
+"MRK": mydataMRK,
+"MUV2": mydataMUV2,
+"SAP": mydataSAP,
+"SDF": mydataSDF,
+"SIE": mydataSIE,
+"TKA": mydataTKA,
+"VOW3": mydataVOW3,
+"OMXSPI": mydataOMXSPI,
+"AAK": mydataAAK,
+
+
+}       
+       
+
+
+var stk="elemm tartalom";
+var art="neve";
+elements = {};
+// JOOO elements[art] = stk;
+elements[art] = mydataADS.join();
+
+
+
+
+
+
+
+        
+    
+    
+			
+        
+			}
+		
+    );
+});
+ 
+		</script>
+	</head>
+	<body>
+<script src="../../js/highstock.js"></script>
+<script src="../../js/modules/exporting.js"></script>
+
+<div id="container" style="height: 500px; min-width: 500px"></div>
+
+<select id="selectem" multiple>
+<option value="ADS">ADS</OPTION> 
+<option value="ALV">ALV</OPTION> 
+<option value="BAS">BAS</OPTION> 
+<option value="BAYN">BAYN</OPTION> 
+<option value="BEI">BEI</OPTION> 
+<option value="CON">CON</OPTION> 
+<option value="CBK">CBK</OPTION> 
+<option value="DAI">DAI</OPTION> 
+<option value="DAX">DAX</OPTION> 
+<option value="DB1">DB1</OPTION> 
+<option value="DBK">DBK</OPTION> 
+<option value="EOAN">EOAN</OPTION> 
+<option value="FME">FME</OPTION> 
+<option value="FRE">FRE</OPTION> 
+<option value="HEI">HEI</OPTION> 
+<option value="LHA">LHA</OPTION> 
+<option value="LIN">LIN</OPTION> 
+<option value="LXS">LXS</OPTION> 
+<option value="MRK">MRK</OPTION> 
+<option value="MUV2">MUV2</OPTION> 
+<option value="SAP">SAP</OPTION> 
+<option value="SDF">SDF</OPTION> 
+<option value="SIE">SIE</OPTION> 
+<option value="TKA">TKA</OPTION> 
+<option value="VOW3">VOW3</OPTION> 
+<option value="OMXSPI">OMXSPI</OPTION> 
+<option value="AAK">AAK</OPTION> 
+
+</select>
+
+
+
+<button id="btn">update</button>
+	
+	</body>
+</html>
