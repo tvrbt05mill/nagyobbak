@@ -159,8 +159,16 @@ T="$(date +%s)"
 
 
 cd /var/www/netfonds.utc/UTC_zes_netfondson
-indul="indul:"$(date)  
-echo ""
+
+indul=""       >>  UTC_zes_netfondson.log
+indul="indul:"$(date)       >>  UTC_zes_netfondson.log
+echo ""						>>  UTC_zes_netfondson.log
+echo $indul					>>  UTC_zes_netfondson.log
+indul="indul:"$(date)
+echo ""				  >>  UTC_zes_netfondson.log
+
+echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
+
 echo $indul
 	
 
@@ -168,6 +176,12 @@ echo $indul
 FARDIG="./fardig/"  
 ZANDO_01="./zando/netfonds/nagyobbak/*.csv";
 ZOTT="./zott/";
+
+echo ""				  >>  UTC_zes_netfondson.log
+ls 		$ZANDO_01			  >>  UTC_zes_netfondson.log
+echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
+
+
 for f in $ZANDO_01
 do
   echo "Processing $f file...  "$ZANDO_01"-ban"
@@ -293,14 +307,17 @@ echo "lefutott a feldolgozasJS() ....."
 
 
 
-echo "<hr><br>DÃÃ¡tum $(date +'%YY*-%m-%d %H:%M')</b>"   >>  UTC_zes_netfondson.log
+echo "$(date)"   >>  UTC_zes_netfondson.log
+
 
 T="$(($(date +%s)-T))"
-echo "<hr><br>Time in seconds: ${T}</b>"   >>  UTC_zes_netfondson.log
-echo "<hr><br>Time in seconds: ${T}</b>"   
+echo "Time in seconds: ${T}"   >>  UTC_zes_netfondson.log
+echo "Time in seconds: ${T}"   
 
 printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  >>  UTC_zes_netfondson.log
 printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  
+
+echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
 
 
 
