@@ -2978,7 +2978,7 @@ var XMLHttpESTI_FELODOZAS = getXMLHttp();
 return ret_
 }
 
-/*
+
 //netfonds_NAGYOBBAK
 const urlNAGYOBBAK= "http://127.0.0.1:8008/cgi-bin/nagyobbak_ajax.sh";
 XMLHttpReq_ESTI_FELODOZAS("", "",urlNAGYOBBAK);
@@ -2995,13 +2995,13 @@ mit='_UTC';
 KONYVT="/var/www/omx.utc.ark/";
 strURL=urlTOMMA+cgi+'?namex='+KONYV_+'&namey=orvos&namez='+mit+'&KONYVT='+KONYVT; 
 ret=XMLHttpReq_ESTI_FELODOZAS("", "",strURL);
-*/
-const urlTOMMA= "http://127.0.0.1:8008/cgi-bin/";
+
+const urlTOMMA2= "http://127.0.0.1:8008/cgi-bin/";
 cgi="tomma_ajax.sh";
 KONYV_="/var/www/realtimedax.utc/";
 mit='';
 KONYVT="/var/www/realtimedax.utc.ark/";
-strURL=urlTOMMA+cgi+'?namex='+KONYV_+'&namey=orvos&namez='+mit+'&KONYVT='+KONYVT; 
+strURL=urlTOMMA2+cgi+'?namex='+KONYV_+'&namey=orvos&namez='+mit+'&KONYVT='+KONYVT; 
 ret=XMLHttpReq_ESTI_FELODOZAS("", "",strURL);
 
 	
