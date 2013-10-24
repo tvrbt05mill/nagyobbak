@@ -18,7 +18,7 @@ function fwrite_stream($fp, $string) {
 
 
 $htmlText=$_POST['text'];
-$symbol=$_POST['papper'];
+$symbol=$_POST['paper'];
 $date_=$_POST['date'];
 
 
