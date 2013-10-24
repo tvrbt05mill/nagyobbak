@@ -62,6 +62,7 @@ sed -i '/;;;;/d'   $1;
 
 
 
+echo ""						>>  UTC_zes_netfondson.log
 
 
 num=1;
@@ -85,6 +86,7 @@ then
 echo "sor:"$num"/"$sorok;
 fi;
 
+,
 
 #aktie=$(echo $line | cut -d , -f1); 
 
@@ -180,6 +182,8 @@ ZOTT="./zott/";
 echo ""				  >>  UTC_zes_netfondson.log
 ls 		$ZANDO_01			  >>  UTC_zes_netfondson.log
 echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
+numfile=0
+numfile=$(($numfile + 1));
 
 
 for f in $ZANDO_01
@@ -192,6 +196,8 @@ do
   kortname=`echo $(basename "$f") | cut -d "-"  -f1  `
 echo "kortname:" $kortname
 
+	numfile=$(($numfile + 1));
+	echo $numfile".dik:" $f				  >>  UTC_zes_netfondson.log
 
   #echo '"'$(basename "$f")'",'	 
   feldolgozas $f  $kortname  $(basename "$f")
