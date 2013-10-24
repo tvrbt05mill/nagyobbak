@@ -550,13 +550,6 @@ esti_feldolgozas();
 
 
 
-						tDate2 = new Date();
-						ho = tDate2.getMonth()+1;
-						loggol("517::log::"+tDate2.getFullYear()+"-"+ho+"-"
-						+tDate2.getDate().padLeft()+"["+tDate2.getHours().padLeft()
-						+":"+ tDate2.getMinutes().padLeft() + ":" +tDate2.getSeconds().padLeft()+"]" 
-						+     "OMX_DAG_ALLA() lefutott ...");
-
 
 						OMX_DAG_ALLA_futott_ma_mar=true;
 
