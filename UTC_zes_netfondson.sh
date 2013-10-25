@@ -4,7 +4,7 @@
 #
 #		UTC_zes_netfondson.sh		UTC-es 
 #									datumozás előeállítása
-#									de nem a php vel hívjuk megm hanem 
+#		 				ver 2.0::	de nem a php vel hívjuk meg hanem 
 #									a nagyobbak scriptből
 #
 #									MERT csak úgí biztosított, hogy a 
@@ -171,19 +171,20 @@ T="$(date +%s)"
 
 cd /var/www/netfonds.utc/UTC_zes_netfondson
 
-
-
-echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
-echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
-echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
-
 echo ""       >>  UTC_zes_netfondson.log
-indul="indul: "$(date)
+echo "+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +"   >>  UTC_zes_netfondson.log
+echo "+ + + + + + + + + +             + + + + + + + + + + + + + + + +"   >>  UTC_zes_netfondson.log
+echo "+ + + + + + + + + +   I N D U L   + + + + + + + + + + + + + + +"   >>  UTC_zes_netfondson.log
+echo "+ + + + + + + + + +               + + + + + + + + + + + + + + +"   >>  UTC_zes_netfondson.log
+echo "+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +"   >>  UTC_zes_netfondson.log
+echo ""       >>  UTC_zes_netfondson.log
+
+indul=$(date)
 echo ""						>>  UTC_zes_netfondson.log
-echo $indul					>>  UTC_zes_netfondson.log
+echo "ELINDULUNK                         "$indul					>>  UTC_zes_netfondson.log
 echo ""				  >>  UTC_zes_netfondson.log
 
-echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
+echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
 
 echo $indul
 	
@@ -193,9 +194,8 @@ FARDIG="./fardig/"
 ZANDO_01="./zando/netfonds/nagyobbak/*.csv";
 ZOTT="./zott/";
 
-echo "ls:"				  >>  UTC_zes_netfondson.log
-ls 		$ZANDO_01			  >>  UTC_zes_netfondson.log
-echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
+echo "ls:                              "$(ls 		$ZANDO_01	| wc -l ) " db *.cvs file"		  >>  UTC_zes_netfondson.log
+echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
 numfile=0
 numfile=$(($numfile + 1));
 
@@ -224,14 +224,14 @@ done
 
 
 
-vege="feldolgozas vege:"$(date)      >>  UTC_zes_netfondson.log
-echo "feldolgozas indult: " $indul     >>  UTC_zes_netfondson.log
-echo "feldolgozas befejezve: " $vege     >>  UTC_zes_netfondson.log
-echo "feldolgozas leutott ....."    >>  UTC_zes_netfondson.log
+vege=$(date)  
+echo "feldolgozas indult:              " $indul     >>  UTC_zes_netfondson.log
+echo "feldolgozas befejezve:           " $vege     >>  UTC_zes_netfondson.log
+echo "feldolgozas leutott ............."    >>  UTC_zes_netfondson.log
 
 
 
-indulJS="indul:"$(date)  
+indulJS=$(date)  
 echo ""
 echo $indulJS
 
@@ -318,24 +318,20 @@ echo  '</select>'  >> $FARDIGJS$SELECTEK
 
 
 vegeJS=$(date)  
-echo "feldolgzozasJS indult: " $indulJS   >>  UTC_zes_netfondson.log
-echo "feldolgzozasJS vege: " $vegeJS     >>  UTC_zes_netfondson.log
-echo "feldolgzozasJS lefutott ....."    >>  UTC_zes_netfondson.log
+echo "feldolgzozasJS indult:           " $indulJS   >>  UTC_zes_netfondson.log
+echo "feldolgzozasJS vege:             " $vegeJS     >>  UTC_zes_netfondson.log
+echo "feldolgzozasJS lefutott ........."    >>  UTC_zes_netfondson.log
 
 
-
-
-
-
-echo "$(date)"   >>  UTC_zes_netfondson.log
+echo "VÉGETÉRT                         "$(date)   >>  UTC_zes_netfondson.log
 
 
 T="$(($(date +%s)-T))"
-echo "Time in seconds: ${T}"   >>  UTC_zes_netfondson.log
-echo "Time in seconds: ${T}"   
+echo "Time in seconds:                  ${T}"   >>  UTC_zes_netfondson.log
+echo "Time in seconds:                  ${T}"   
 
-printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  >>  UTC_zes_netfondson.log
-printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  
+printf "Pretty format:                  %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  >>  UTC_zes_netfondson.log
+printf "Pretty format:                  %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  
 
 echo "+ + +     V E G E     + + + + + + + + + + "   >>  UTC_zes_netfondson.log
 
