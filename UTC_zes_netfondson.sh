@@ -162,11 +162,10 @@ T="$(date +%s)"
 
 cd /var/www/netfonds.utc/UTC_zes_netfondson
 
-indul=""       >>  UTC_zes_netfondson.log
-indul="indul:"$(date)       >>  UTC_zes_netfondson.log
+echo ""       >>  UTC_zes_netfondson.log
+indul="indul: "$(date)
 echo ""						>>  UTC_zes_netfondson.log
 echo $indul					>>  UTC_zes_netfondson.log
-indul="indul:"$(date)
 echo ""				  >>  UTC_zes_netfondson.log
 
 echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
@@ -210,10 +209,10 @@ done
 
 
 
-vege="vege:"$(date)  
-echo "indult: " $indul
-echo  "befejezve: " $vege
-echo "lefutott a feldolgozas() ....."
+vege="feldolgozas vege:"$(date)      >>  UTC_zes_netfondson.log
+echo "feldolgozas indult: " $indul     >>  UTC_zes_netfondson.log
+echo "feldolgozas befejezve: " $vege     >>  UTC_zes_netfondson.log
+echo "feldolgozas leutott ....."    >>  UTC_zes_netfondson.log
 
 
 
@@ -303,10 +302,10 @@ echo  '</select>'  >> $FARDIGJS$SELECTEK
 #read -p "bill leüt..."
 
 
-vegeJS="vege:"$(date)  
-echo "indult: " $indulJS
-echo  "befejezve: " $vegeJS
-echo "lefutott a feldolgozasJS() ....."
+vegeJS=$(date)  
+echo "feldolgzozasJS indult: " $indulJS   >>  UTC_zes_netfondson.log
+echo "feldolgzozasJS vege: " $vegeJS     >>  UTC_zes_netfondson.log
+echo "feldolgzozasJS lefutott ....."    >>  UTC_zes_netfondson.log
 
 
 
