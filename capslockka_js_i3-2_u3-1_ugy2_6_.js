@@ -550,6 +550,13 @@ esti_feldolgozas();
 
 
 
+						tDate2 = new Date();
+						ho = tDate2.getMonth()+1;
+						loggol("517::log::"+tDate2.getFullYear()+"-"+ho+"-"
+						+tDate2.getDate().padLeft()+"["+tDate2.getHours().padLeft()
+						+":"+ tDate2.getMinutes().padLeft() + ":" +tDate2.getSeconds().padLeft()+"]" 
+						+     "esti felodolgozas() hivasa megvolt lefutott ...");
+
 
 						OMX_DAG_ALLA_futott_ma_mar=true;
 
@@ -2976,8 +2983,13 @@ return ret_
 const urlNAGYOBBAK= "http://127.0.0.1:8008/cgi-bin/nagyobbak_ajax.sh";
 XMLHttpReq_ESTI_FELODOZAS("", "",urlNAGYOBBAK);
 
-const urlUTCzes= "http://127.0.0.1:8008/cgi-bin/UTC_zes_netfondson.sh";
-ret=XMLHttpReq_ESTI_FELODOZAS("", "",urlUTCzes);
+/*  UTC_zes_netfondson.sh
+ * nem innen kellene meghívni, hanem a   nagyobbak_ajax.sh  
+ * ból, mert akkor már elkészül a amásolás a ./nagyobbak könyvtárba 
+ * ugyanis
+ * ennek a ascriptnk nem kel átadni PARAMETER, csalk saját maga fut*/
+/*const urlUTCzes= "http://127.0.0.1:8008/cgi-bin/UTC_zes_netfondson.sh";
+ret=XMLHttpReq_ESTI_FELODOZAS("", "",urlUTCzes);*/
 //	alert("ret:"+ret)
 
 
