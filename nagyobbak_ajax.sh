@@ -17,8 +17,8 @@ date
 
  
 
-echo ""   > /home/www/cgi-bin/nagyobbak.log  
-date   >> /home/www/cgi-bin/nagyobbak.log  
+echo ""   > /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+date   >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
 echo ""
 
 
@@ -45,7 +45,9 @@ echo "arkiv:["$arkiv"]"
 zip   -q $arkiv  *.csv
 
 
-mv -v "$arkiv" ./ark/"$arkiv"
+mv -v "$arkiv" ./ark/"$arkiv"     >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo ""
+
 mv -v BBB.zip ./ark/AAA.zip
 echo "mv eredmenye volt"
 
@@ -70,12 +72,14 @@ echo "utana ugyis DATUM alapjan zippeljuk be a z arkiv.fut ban"
 for f  in  AAK-*.*	ABB-*.*	ACTI-*.*	AERO_B-*.*	AF_B-*.*	AKSOO-*.*	ALFA-*.*	ALIV_SDB-*.*	AOI-*.*	AOIL_SDB-*.*	ARCM-*.*	ASSA_B-*.* 	ATCO_A-*.*	ATCO_B-*.*	AXFO-*.*	AXIS-*.*	AZN-*.*	BETS_B-*.*	BIGG_B-*.*	BILI_A-*.*	BILL-*.*	BINV-*.*	BOL-*.*	CAS-*.*	CAST-*.*	CDON-*.*	CLS_B-*.*	CTEC-*.*	DIAM_B-*.*	DNBO-*.*	EKTA_B-*.*	ELUX_B-*.*	ENQ-*.*	ENRO-*.*	EPCT-*.*	ERIC_B-*.*	FABG-*.*	FING_B-*.*	FOEO-*.*	GETI_B-*.*	GJFO-*.*	GOLD-*.*	HEXA_B-*.*	HLDX-*.*	HM_B-*.*	HOGA_B-*.*	HOLM_B-*.*	HPOL_B-*.*	HUFV_A-*.*	HUSQ_B-*.*	IJ-*.*	INDU_A-*.*	INDU_C-*.*	INVE_A-*.*	INVE_B-*.*	JM-*.*	KAHL-*.*	KARO-*.*	KDEV-*.*	KINV_B-*.*	KLED-*.*	LIAB-*.*	LOOM_B-*.*	LUMI_SDB-*.*	LUND_B-*.*	LUPE-*.*	MEDA_A-*.*	MHGO-*.*	MICR-*.*	MIC_SDB-*.*	MTG_B-*.*	MVIR_B-*.*	NCC_B-*.*	NDA_SEK-*.*	NEWA_B-*.*	NHYO-*.*	NIBE_B-*.*	NOBI-*.*	NOKI_SEK-*.*	NOMI-*.*	OASM-*.*	OPCO-*.*	ORI_SDB-*.*	ORKO-*.*	PAR-*.*	PEAB_B-*.*	PGSO-*.*	PREC-*.*	RATO_B-*.*	RCLO-*.*	RURI_B-*.*	SAAB_B-*.*	SAND-*.*	SAS-*.*	SCA_B-*.*	SCH_O-*.*	SCV_B-*.*	SDRLO-*.*	SEB_A-*.*	SECU_B-*.*	SEMC-*.*	SENS-*.*	SHB_A-*.*	SKA_B-*.*	SKF_B-*.*	SMF-*.*	SNM-*.*	SOBI-*.*	SSAB_A-*.*	SSAB_B-*.*	STBO-*.*	STE_R-*.*	STLO-*.*	SUBCO-*.*	SWED_A-*.*	SWMA-*.*	TAUR_B-*.*	 TEL-*.*	TELO-*.*	TGSO-*.*	TLSN-*.*	TREL_B-*.*	UNIB_SDB-*.*	VOLV_A-*.*	VOLV_B-*.*	XACT_BEAR-*.*	XACT_BULL-*.*	 YARO-*.*
 do
 
-mv -v -f $f  ./nagyobbak
+mv -v -f $f  ./nagyobbak        >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
 
 done
 
-
-mv -v -f *-*.* ./kisebbek
+echo ""     >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "kisebbek:"     >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo ""     >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+mv -v -f *.csv ./kisebbek         >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
 
 
 echo "000nagyobbak.fut  KESZ"
@@ -122,9 +126,18 @@ zip -q $arkiv  ../nagyobbak/*$year$honap.csv
 echo "3. arkiv.fut hivja::  sendemail indul"
 sendemail -s smtp.upcmail.hu:25 -f skandihaz@yahoo.se \
        -t skandihaz@yahoo.se -u "sendemail OMX  :: $honap.zip"  \
-            -m "omx  $year_$honap.zip"  -a $arkiv
+            -m "omx  $year_$honap.zip"  -a $arkiv        >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
             
  echo "vegeeeeeeeeeeeee"
 
 echo "     nagyobbak_ajax.bash-bolveeeeeeggggggeeeeeee"
-echo "     nagyobbak_ajax.bash-bolveeeeeeggggggeeeeeee">> /home/www/cgi-bin/nagyobbak.log  
+echo "     nagyobbak_ajax.bash-bolveeeeeeggggggeeeeeee" >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     * * * * * * * * * * * * * * * * * * * * * *" >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     * * * * * * * * * * * * * * * * * * * * * *" >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     * * * * * * * * * * * * * * * * * * * * * *" >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     innenn közbvetlenül meghívjuk a            " >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     home/www/cgi-bin/UTC_zes_netfondson.sh-t   " >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     * * * * * * * * * * * * * * * * * * * * * *" >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+echo "     * * * * * * * * * * * * * * * * * * * * * *" >> /var/www/netfonds.utc/UTC_zes_netfondson/nagyobbak.log  
+
+/home/www/cgi-bin/UTC_zes_netfondson.sh
