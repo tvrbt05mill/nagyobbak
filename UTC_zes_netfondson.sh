@@ -2,9 +2,14 @@
 # ver:
 #	  
 #
-#	  UNIXTtimestamp_130929_1_0	::  Letöltött netfonds fileokbol 
-#									UTC-es 
+#		UTC_zes_netfondson.sh		UTC-es 
 #									datumozás előeállítása
+#									de nem a php vel hívjuk megm hanem 
+#									a nagyobbak scriptből
+#
+#									MERT csak úgí biztosított, hogy a 
+#									./nagyobbak
+#									másolasa készen lett!!!
 
 
 
@@ -157,10 +162,20 @@ minta=$(TZ=GMT+0 date  -d '04/25/2008 00:00:00' +%s) ;
 echo "minta:" $minta;
 TZ=GMT+0 date --date='04/25/2008 00:00:00'   +"%s";
 
+
+
+
+
 T="$(date +%s)"
 
 
 cd /var/www/netfonds.utc/UTC_zes_netfondson
+
+
+
+echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
+echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
+echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
 
 echo ""       >>  UTC_zes_netfondson.log
 indul="indul: "$(date)
@@ -178,7 +193,7 @@ FARDIG="./fardig/"
 ZANDO_01="./zando/netfonds/nagyobbak/*.csv";
 ZOTT="./zott/";
 
-echo ""				  >>  UTC_zes_netfondson.log
+echo "ls:"				  >>  UTC_zes_netfondson.log
 ls 		$ZANDO_01			  >>  UTC_zes_netfondson.log
 echo " 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "   >>  UTC_zes_netfondson.log
 numfile=0
@@ -322,7 +337,7 @@ echo "Time in seconds: ${T}"
 printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  >>  UTC_zes_netfondson.log
 printf "<hr>Pretty format: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))"  "$((T/60%60))"  "$((T%60))"  
 
-echo "+ + + + + + + + + + + + + + + + + + + + + "   >>  UTC_zes_netfondson.log
+echo "+ + +     V E G E     + + + + + + + + + + "   >>  UTC_zes_netfondson.log
 
 
 
