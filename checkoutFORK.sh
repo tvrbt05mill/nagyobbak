@@ -2,6 +2,11 @@
 
 set -x
 
+##   "_UTC"  levéve, a ARGY paraméterben a ragsuszt átküldi 
+##   itt már készen kapkiuk
+##   kicserékltük a a$KOYNT változóra a bekddrótozzz omx.utc.ark-t
+
+
 echo "Content-type:    text/html"
 echo ""
 
@@ -70,7 +75,8 @@ echo "checkoutFORK     <br>ARGX:"$ARGX  " <br> ARGY:"$ARGY    "<br>ARGZ:"$ARGZ  
 echo "checkoutFORK     1" $1" ;; 2 "$2"  ;;  3  "$3   ";;"  $4  #>>/var/www/omx.utc.ark/checkout/log
   echo ""
 
-fileITT=$( wc -l  "/var/www/omx.utc.ark/"$ARGZ"_UTC")
+#fileITT=$( wc -l  $KONYVT""$ARGZ"_UTC")
+fileITT=$( wc -l  $KONYVT""$ARGZ)
 echo "checkoutFORK     sorok szama :: file ittTT:"  $fileITT
 echo "checkoutFORK     <br></br>"
 echo "checkoutFORK     "  >>/var/www/omx.utc.ark/checkout/log
@@ -90,12 +96,18 @@ date  >>/var/www/omx.utc.ark/checkout/log
 #tail  "/var/www/omx.utc.ark/"$ARGZ"_UTC"  #>>/var/www/omx.utc.ark/checkout/log
 #ARGX=150
 #ARGY="orvos"
-#######################xtail  -n+$ARGX  "/var/www/omx.utc.ark/"$ARGZ"_UTC"
+
+#tail  -n+$ARGX  "/var/www/omx.utc.ark/"$ARGZ
+tail  -n+$ARGX  $KONYVT""$ARGZ
+
+#"_UTC"
+
 #######################tail  -n+$ARGX  "/var/www/omx.utc.ark/"$ARGZ"_UTC"  >>  /var/www/omx.utc.ark/checkout/DAX_UTC"$ARGY"
 
 echo "checkoutFORK     "
 echo "checkoutFORK     "
-ls -l $KONYVT""$ARGZ"_UTC"
+#ls -l $KONYVT""$ARGZ"_UTC"
+ls -l $KONYVT""$ARGZ
 echo "checkoutFORK     "
 echo "checkoutFORK     "
 
