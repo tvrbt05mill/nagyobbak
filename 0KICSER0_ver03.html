@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highstock Example</title>
+
+
+<SCRIPT  SRC="KICSER.js" TYPE="text/javascript"></SCRIPT> 
+
+/*ver  3.0   */     /*   %számítás rákkatintva a GRAFIKONRA*/
+
+
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+$(function() {
+
+	    /* ELMENTJÜK EBBE A Y ÉRTÉKET  */
+    var alapertek=1;  
+    
+    var chart = new Highcharts.StockChart(
+		{
+			chart: {
+					renderTo: 'container'
+			},
+			title: {
+                text: 'KICSER'
+            },
+			
+			  tooltip: {
+                /*  TOOLTIPBEN megjelenitjük  */
+                formatter: function() {
+                  if (alapertek == 1) {} else  {var szaz=(this.y-alapertek)/alapertek*100;}
+                return Highcharts.dateFormat('%Y - %B - %e, , %H:%M',this.x)+'<br><b>'+ Highcharts.numberFormat(this.y, 2) +'</b><br/>'+
+                    '%: '+ Highcharts.numberFormat(szaz, 2);
+            }  
+            },
+    
+			
+			
+			series: [{
+            name: 'KICSER',
+            //mydata
+            data: mydataKICSER, //tombyYY['YY'],//mydata,
+             events: {
+                click: function(event) {
+                    var szaz=0;
+                    /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+                    if (alapertek == 1) {
+                           alapertek=event.point.y;      
+                           alert(event.point.y/alapertek);
+                        }
+                    else
+                    /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+                    {szaz=(event.point.y-alapertek)/alapertek*100};   
+                        this.chart.series[1].addPoint({
+                        x: event.point.x,
+                        title: '#'+Highcharts.numberFormat(szaz, 2)+"("+Highcharts.numberFormat(event.point.y,2)+")"
+                    }); 
+                }
+
+            }
+			},
+			{
+			/* ALAPERTÉK KIJELZESE a tenghelyen vagy line-on   */ 	
+            type: 'flags',
+            data: [],
+            onSeries: 'dataseries',
+            shape: 'squarepin',
+            }
+            ]
+		}
+		
+    );
+});
+ 
+		</script>
+	</head>
+	<body>
+<script src="../../js/highstock.js"></script>
+<script src="../../js/modules/exporting.js"></script>
+
+<div id="container" style="height: 500px; min-width: 500px"></div>
+
+	
+	</body>
+</html>
