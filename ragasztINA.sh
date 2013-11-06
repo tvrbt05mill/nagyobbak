@@ -66,6 +66,14 @@ feldolgozasIFEK ()  {
 }
 
 
+#######################################################################
+#######                 ###############################################
+#######   ragasztHTML   ###############################################
+#######                 ###############################################
+#######################################################################
+ragasztHTML(){
+cat  $1                  | sed "s@$2@$3@"          >   $4"000"$5".html"
+}
 
 
 
@@ -75,10 +83,6 @@ feldolgozasIFEK ()  {
 
 konyvtar="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line.data/OMX_DAX_feldolgozas/"
 SERVER="192.168.0.190:8008"
-##################curl http://192.168.0.190:8008/cgi-bin/$cgi\?namex=$sorok_szama\&namey=orvos\&namez=$mit\&KONYVT=\/var\/www\/omx.utc.ark\/  
-##################curl http://127.0.0.1/cgi-bin/$cgi\?namex=$sorok_szama\&namey=orvos\&namez=$mit\&KONYVT=$KONYVT 
-#konyvtarJS="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line/"
-# OLD   konyvtar="/media/Lubuntuuuuu/VirtualBoxDisks_12_10_old_LUBUNTU/transfer/f/higstock_dwn/examples/basic-line.data/realtimedax_feldolgozas/UTC_es_tombok_js_alakitasa/data/"
 
 ##::::::::::::::::::::::::::::::::::::::::::::: ##
 ##::::::::::::::::::::::::::::::::::::::::::::: ##
@@ -88,12 +92,10 @@ SERVER="192.168.0.190:8008"
 ##::::::::::::::::::::::::::::::::::::::::::::: ##
 ##                  ADS   ALV  ...              ##
 
-#konyvtar="/media/Lubuntuuuuu/VirtualBoxDisks_12_10_old_LUBUNTU/transfer/f/higstock_dwn/examples/basic-line.data/UTC_es_tombok_js_alakitasa/fardig/"
 konyvtar="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line.UTC/realtimedax/"
 for mit in ADS   ALV    BAS       BAYN       BEI       BMW       CBK       CON       DAI       DB1       DBK       DPW       DTE       EOAN       FME       FRE       HEI       HEN3       IFX       LHA       LIN       LXS       MRK       MUV2       RWE       SAP       SDF       SIE       TKA       VOW3 
 do
 sorok_szama=$(wc -l "$konyvtar""$mit"  | cut -d ' ' -f1)
-
 echo "ragaszt          + + + + + + + + + + + + + + + + + + + + + + + + + + +:  " 
 echo "ragaszt          + + + + + + + + + + + + + + + + + + + +:  " 
 echo "ragaszt          for LOOP"
@@ -108,9 +110,10 @@ KONYVT="/var/www/realtimedax.utc.ark/"
 curl http://rvs.dyndns.dk:8008/cgi-bin/$cgi\?namex=$sorok_szama\&namey=orvos\&namez=$mit\&KONYVT=$KONYVT | grep "\[" >> $konyvtar""$mit
 echo "ragaszt          + + + + + + + +     checkout.sh  VÉGEEEEEEE"
 echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   INDULNA"
-#konyvtarJS="/media/Lubuntuuuuu/VirtualBoxDisks_12_10_old_LUBUNTU/transfer/f/higstock_dwn/examples/basic-line/"
 konyvtarJS="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line/"
 feldolgozasJS $konyvtar$mit  $mit  $konyvtarJS 
+  ragasztHTML $konyvtarJS"0KICSER0_ver03.html" "KICSER" $mit $konyvtarJS $mit
+
 done
 echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   VEGGEEE"
 
@@ -140,12 +143,10 @@ echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   
 ##:::::::::::::::::::::::::::::::::::::::::::::##
 ##                 OMX DAX             _UTC    ##
 
-#konyvtar="/media/Lubuntuuuuu/VirtualBoxDisks_12_10_old_LUBUNTU/transfer/f/higstock_dwn/examples/basic-line.data/OMX_DAX_feldolgozas/"
 konyvtar="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line.UTC/omxspi/"
 for mit in DAX OMXSPI
 do
 sorok_szama=$(wc -l "$konyvtar""$mit"  | cut -d ' ' -f1)
-             
 echo "ragaszt          + + + + + + + + + + + + + + + + + + + + + + + + + + +:  " 
 echo "ragaszt          + + + + + + + + + + + + + + + + + + + +:  " 
 echo "ragaszt          for LOOP"
@@ -163,6 +164,8 @@ echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   
 #konyvtarJS="/media/Lubuntuuuuu/VirtualBoxDisks_12_10_old_LUBUNTU/transfer/f/higstock_dwn/examples/basic-line/"
 konyvtarJS="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line/"
 feldolgozasJS $konyvtar$mit  $mit  $konyvtarJS 
+  ragasztHTML $konyvtarJS"0KICSER0_ver03.html" "KICSER" $mit $konyvtarJS $mit
+
 done
 echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   VEGGEEE"
 
@@ -196,7 +199,7 @@ for mit in AAK ABB ACTI AERO_B AF_B AKSOO ALFA ALIV_SDB AOI AOIL_SDB ARCM ASSA_B
 
 do
 sorok_szama=$(wc -l "$konyvtar""$mit"  | cut -d ' ' -f1)
-sorok_szama=1
+
 echo "ragaszt          + + + + + + + + + + + + + + + + + + + + + + + + + + +:  " 
 echo "ragaszt          + + + + + + + + + + + + + + + + + + + +:  " 
 echo "ragaszt          for LOOP"
@@ -214,7 +217,7 @@ echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   
 #konyvtarJS="/media/Lubuntuuuuu/VirtualBoxDisks_12_10_old_LUBUNTU/transfer/f/higstock_dwn/examples/basic-line/"
 konyvtarJS="/media/fujilakare5/XXXhomokozo/highchart_dwn/examples/basic-line/"
 feldolgozasJS $konyvtar$mit  $mit  $konyvtarJS 
-
+  ragasztHTML $konyvtarJS"0KICSER0_ver03.html" "KICSER" $mit $konyvtarJS $mit
 feldolgozasIFEK $mit  $konyvtarIFEK
 done
 echo "ragaszt          + + + + + + + +          checkout.sh   feldolgozasJS()   VEGGEEE"
