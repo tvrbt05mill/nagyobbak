@@ -7,8 +7,7 @@
 
 <SCRIPT  SRC="KICSER.js" TYPE="text/javascript"></SCRIPT> 
 
-/*ver  3.01   */     /*   %számítás rákkatintva a GRAFIKONRA*/  KICSER
-
+/*ver  3.0   */     /*   %számítás rákkatintva a GRAFIKONRA*/
 
 
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -17,6 +16,9 @@ $(function() {
 
 	    /* ELMENTJÜK EBBE A Y ÉRTÉKET  */
     var alapertek=1;  
+     var flagTorolt=true;
+    var hasPlotLine = false;
+    var $button = $('#plotline'); 
     
     var chart = new Highcharts.StockChart(
 		{
@@ -45,43 +47,126 @@ $(function() {
              events: {
                 click: function(event) {
                     var szaz=0;
-                    /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+                    var Xpont=event.point.x;
+                    var Ypont=event.point.y;
                     if (alapertek == 1) {
-                           alapertek=event.point.y;      
-                           alert(event.point.y/alapertek);
+                           //alapertek=event.point.y;      
+                           //alert(event.point.y/alapertek);
                         }
                     else
                     /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
-                    {szaz=(event.point.y-alapertek)/alapertek*100};   
-                        this.chart.series[1].addPoint({
+                    {
+						//szaz=(event.point.y-alapertek)/alapertek*100
+					}; 
+	                if (flagTorolt) {
+						alert("0 FFFFF event point::"+ Xpont);
+						this.chart.addSeries({
+						name: 'ADBE',
+						type: 'flags',
+						onSeries: 'dataseries',
+						data: []
+						}, false);
+							
+						alapertek=event.point.y;      /* ALAPERTÉK ELMENTÉSE a számoláshoz*/ 
+						this.chart.series[2].setData([{
+						x: event.point.x,
+						title: '#'+Highcharts.numberFormat(szaz, 2)+"("+Highcharts.numberFormat(event.point.y,2)+")"
+						}]);
+						
+						
+						if (!hasPlotLine) {
+							this.chart.xAxis[0].addPlotLine({
+							value: Xpont,
+							color: 'red',
+							width: 1,
+							id: 'plot-line-x'
+							});
+							
+						} 
+    
+						if (!hasPlotLine) {
+							this.chart.yAxis[0].addPlotLine({
+							value: Ypont,
+							color: 'blue',
+							width: 1,
+							id: 'plot-line-y'
+							});
+							
+						} 
+						$button.html('Remove plot line');
+						hasPlotLine = !hasPlotLine;
+
+						
+						
+					
+						flagTorolt=false;	
+						
+						
+					}
+					else
+					{                 // ha PRG-ból adjuk hozza series[2] lesz a száma!!! és nem az [1], amit a DEFINITION részben adnk meg
+					szaz=(event.point.y-alapertek)/alapertek*100;
+                    this.chart.series[2].addPoint({
                         x: event.point.x,
                         title: '#'+Highcharts.numberFormat(szaz, 2)+"("+Highcharts.numberFormat(event.point.y,2)+")"
-                    }); 
+                    })
+                    }; 
+                
                 }
 
             }
-			},
+			}/*,
 			{
-			/* ALAPERTÉK KIJELZESE a tenghelyen vagy line-on   */ 	
+			// ALAPERTÉK KIJELZESE a tenghelyen vagy line-on    	
             type: 'flags',
             data: [],
             onSeries: 'dataseries',
             shape: 'squarepin',
-            }
+            }*/
             ]
-		}
+		}, function(chart) {
+			$(".on").click(function(){
+			var c = chart;
+			alert('0 fuuuuuuuuu'+c.series.length);                    
+            $.each(c.series,function(){
+              if(this.type=="flags"){
+                 console.log("hiding " + this.name)
+                 if(this.visible==true){
+                    //this.hide() ;
+                     this.remove(false);
+                     flagTorolt=true;
+                     $('#plotline').click();
+                 }
+                 else
+                 {
+                     this.show()                   
+                 }
+              }                   
+			})
+			alert('1 fuuuuuuuuu'+c.series.length);                    
+			});
+			;
+			$('#plotline').click(function(){ 
+				chart.xAxis[0].removePlotLine('plot-line-x');
+				chart.yAxis[0].removePlotLine('plot-line-y');
+				$button.html('Add plot line');
+        		hasPlotLine = !hasPlotLine;
+				});			
+			
+		}	
 		
     );
 });
  
-		</script>
+ 		</script>
 	</head>
 	<body>
 <script src="../../js/highstock.js"></script>
 <script src="../../js/modules/exporting.js"></script>
 
 <div id="container" style="height: 500px; min-width: 500px"></div>
-
+<button class="on">Show/Hide Flags</button>
+<button id="plotline" style="visibility:hidden;" >Show/Hide plotline</button>
 	
 	</body>
 </html>
